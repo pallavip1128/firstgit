@@ -10,21 +10,33 @@
     <label> Email:</label>
     <input type="email"  name="emailId" required/>
     <label> phone</label>
-    <input type="tel"  name="phone" required/>
+    <input type="tel"  name="phone" />
     <button> Submit</button>
     </form>
     <script>
-      function saveToLocalStorage(event)
-{
-    event.preventDefault();
+      function saveToLocalStorage(event){
+     event.preventDefault();
     const name = event.target.username.value;
 		const email = event.target.emailId.value;
         const phone = event.target.phone.value;
-		localStorage.setItem('name',name);
-        localStorage.setItem('email',email);
-        localStorage.setItem('phone',phone);
-   
-}  
+		// localStorage.setItem('name',name);
+        // localStorage.setItem('email',email);
+        // localStorage.setItem('phone',phone);
+
+        const obj = {
+            name,
+            email,
+            phone
+
+        }
+        localStorage.setItem(obj.email,JSON.stringify(obj))
+        showUserOnScreen(obj)
+   function showUserOnScreen(obj){
+    const parentElem = document.getElementById('listOfitems');
+    parentElem.innerHTML = '<li>${obj.name}-${ obj.email}-${obj.phone}</li>'
+   }
+}
+  
     </script>
 </body>
 </html>
